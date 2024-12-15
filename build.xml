@@ -1,0 +1,47 @@
+<project name="MyProject" default="build" basedir=".">
+    <!-- Définition des répertoires -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="doc.dir" value="doc"/>
+    <property name="lib.dir" value="dist"/> <!-- Répertoire contenant les fichiers JAR -->
+    <property name="main.class" value="Main"/>
+
+    <!-- Nettoyer le projet -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${doc.dir}"/>
+    </target>
+
+    <!-- Compiler le code -->
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="junit-platform-console-standalone-1.9.3.jar"/> <!-- Inclut tous les fichiers JAR dans dist -->
+                    <include name="junit-platform-console-standalone-1.11.3.jar"/> <!-- Inclut tous les fichiers JAR dans dist -->
+                    <include name="mockito-core-4.11.0.jar"/> <!-- Inclut tous les fichiers JAR dans dist -->
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Générer le JAR exécutable -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/MyProject.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="dist/"/> <!-- Chemin relatif pour les JAR dans le répertoire dist -->
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Cible principale -->
+    <target name="build" depends="jar">
+        <echo message="Build complet : JAR généré dans ${dist.dir} "/>
+    </target>
+
+</project>

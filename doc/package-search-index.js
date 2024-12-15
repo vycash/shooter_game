@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"config"},{"l":"controller"},{"l":"modele"},{"l":"modele.actions"},{"l":"modele.armes"},{"l":"modele.components"},{"l":"modele.strategy.playerStrategy"},{"l":"modele.strategy.weaponStrategy"},{"l":"modele.util"},{"l":"vue"}];updateSearchResults();
